@@ -1,13 +1,23 @@
 
 import express from 'express';
+import cors from 'cors';
 
 import dotenv from 'dotenv';
 import router from './routes/mpesaRoute.js';
 
 dotenv.config();
 
+const corsOptions = {
+    origin: 'http://localhost:5173', 
+    methods: ['GET', 'POST'], 
+    allowedHeaders: ['Content-Type'],
+};
+
+
+
 const app = express();
 app.use(express.json());
+app.use(cors(corsOptions));
 
 const PORT = process.env.PORT || 3000;
 app.use('/api', router);
